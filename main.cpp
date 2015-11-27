@@ -3,9 +3,11 @@
 using namespace std;
 
 struct person;
-void reading_person(vector<person> v);
+void reading_person();
+void readDatabase(vector<person>& v);
 void welcome();
 void choices();
+void displayDatabase(vector<person> v);
 
 struct person
 {   string name;
@@ -117,4 +119,44 @@ void reading_person()
 
     file.close();
 
+}
+
+void readDatabase(vector<person>& v)
+{
+    ifstream file;
+    file.open("database.txt");
+
+    int i= 0;
+    string temp;
+
+    if(file.is_open())
+    {
+        while(!file.eof())
+        {
+            //cout << "Go into the read!" << endl;
+            getline(file, v[i].name);
+            getline(file, v[i].gender);
+            file >> v[i].birthYear;
+            file >> v[i].deathYear;
+            //cout << "Done reading" << endl;
+            i++;
+        }
+    }
+    else
+        cout << "Unable to open file" << endl;
+
+    file.close();
+
+}
+
+void displayDatabase(vector<person> v)
+{
+    //cout << "I go into display Database..." << endl;
+    for(unsigned int i = 0; v.size() > i; i++)
+    {
+        cout << "Name: " << v[i].name << endl;
+        cout << "Gender: " << v[i].gender << endl;
+        cout << "Year of birth: " << v[i].birthYear << endl;
+        cout << "Year of death: " << v[i].deathYear << endl << endl;
+    }
 }
