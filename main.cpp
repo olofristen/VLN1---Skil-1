@@ -74,7 +74,7 @@ void choices()
     }
 }
 
-void reading_person(vector<person> v)
+void reading_person()
 {
     int number;
 
@@ -83,28 +83,38 @@ void reading_person(vector<person> v)
 
     cout << endl << "Type in person: " << endl << endl;
 
-    for(unsigned int i = 0; i < number; i++)
+    ofstream file;
+    file.open("database.txt", ios::out | ios::app);
+
+    string temp;
+
+    if(file.is_open())
     {
-        cout << "Name: ";
-        cin >> v[i].name;
-        cout << "Gender: ";
-        cin >> v[i].gender;
-        cout << "Year of birth: ";
-        cin >> v[i].birthYear;
-        cout << "Year of death: ";
-        cin >> v[i].deathYear;
-        cout<< " "<< endl;
+        for(int i = 0; i < number; i++)
+        {
+            cout << "Name: ";
+            cin.ignore();
+            getline(cin, temp);
+            file << temp << endl;
+
+            cout << "Gender: ";
+            cin >> temp;
+            file << temp << endl;
+
+            cout << "Year of birth: ";
+            cin >> temp;
+            file << temp << endl;
+
+            cout << "Year of death: ";
+            cin >> temp;
+            file << temp << endl << endl;
+
+            cout << endl;
+        }
     }
+    else
+        cout << "Unable to open file";
 
-    cout << "Here are your persons: " << endl << endl;
-
-    for(unsigned int i = 0; i < number; i++)
-   {
-        cout << "Name: " << v[i].name << endl;
-        cout << "Gender: " << v[i].gender << endl;
-        cout << "Year of birth: " << v[i].birthYear << endl;
-        cout << "Year of death: " << v[i].deathYear << endl;
-        cout << endl;
-   }
+    file.close();
 
 }
