@@ -3,6 +3,9 @@
 #include <string>
 #include <cstdlib>
 #include <iomanip>
+#include <list>
+#include <vector>
+#include <algorithm>
 using namespace std;
 
 class Person
@@ -16,24 +19,60 @@ class Person
     public:
         Person();
         Person (string name, string gender, int birthYear, int deathYear);
-        void welcome();
-        void choices();
+        //void welcome();
+        //void choices();
         void readData();
         void displayData();
         void searchData();
         void sortData();
         void update();
 
+        bool operator < (const Person& r);
+
+
 };
+void welcome();
+void choices();
 
 int main()
 {
-    Person person;
+    vector<Person> vec;
 
-    person.welcome();
-    person.choices();
+    welcome();
+    choices();
+
+    vec.push_back(Person("I","kk",1738,2984));
+
+    vec.push_back(Person("E","kk",1738,234));
+
+    vec.push_back(Person("U","kk",1738,234));
+
+    vec.push_back(Person("B","kk",1738,234));
+
+    vec.push_back(Person("A","kk",63,2984));
+
+    for(int i = 0; i < vec.size(); i++) {
+        vec[i].displayData();
+    }
+    sort(vec.begin(), vec.end());
+
+    cout <<endl << "Sorted alphabetically (ascending): "<<endl<<endl;
+    for(int i = 0; i < vec.size(); i++) {
+        vec[i].displayData();
+    }
+    sort(vec.rbegin(), vec.rend());
+
+    cout <<"Sorted alphabetically (descending): "<<endl<<endl;
+    for(int i = 0; i < vec.size(); i++) {
+        vec[i].displayData();
+    }
+
 
 }
+bool Person::operator < (const Person &r) {
+     return this->name < r.name;
+ }
+
 Person::Person()
 {
     name = " ";
@@ -48,7 +87,7 @@ Person::Person(string name, string gender, int birthYear, int deathYear)
     this->birthYear = birthYear;
     this->deathYear = deathYear;
 }
-void Person::welcome()
+void welcome()
 {
     cout << "===================================" << endl;
     cout << "|             WELCOME             |" << endl;
@@ -61,7 +100,7 @@ void Person::welcome()
          << "computer scientists of all time!" << endl;
     cout << endl;
 }
-void Person::choices()
+void choices()
 {
     int menu = 0;
 
