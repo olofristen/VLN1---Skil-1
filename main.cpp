@@ -127,25 +127,24 @@ void reading_person()
 void readDatabase(vector<person>& v)
 {
     ifstream file;
-    file.open("database.txt");
-
-    int i= 0;
-    string temp;
+    file.open("database.csv");
 
     if(file.is_open())
     {
         while(!file.eof())
         {
-            //cout << "Go into the read!" << endl;
+            cout << "Go into the read!" << endl;
             person a;
+            string tempBirth, tempDeath;
             getline(file, a.name);
             getline(file, a.gender);
-            file >> a.birthYear;
-            file >> a.deathYear;
-            //cout << "Done reading" << endl;
+            getline(file, tempBirth);
+            getline(file, tempDeath);
+            a.birthYear = atoi(tempBirth.c_str());
+            a.deathYear = atoi(tempDeath.c_str());
+            cout << "Done reading" << endl;
             v.push_back(a);
         }
-
     }
     else
         cout << "Unable to open file" << endl;
@@ -156,8 +155,8 @@ void readDatabase(vector<person>& v)
 
 void displayDatabase(vector<person> v)
 {
-    //cout << "I go into display Database..." << endl;
-    for(unsigned int i = 0; v.size() > i; i++)
+    cout << "I go into display Database..." << endl;
+    for(unsigned int i = 0; (v.size()-1) > i; i++)
     {
         cout << "Name: " << v[i].name << endl;
         cout << "Gender: " << v[i].gender << endl;
@@ -165,3 +164,4 @@ void displayDatabase(vector<person> v)
         cout << "Year of death: " << v[i].deathYear << endl << endl;
     }
 }
+
