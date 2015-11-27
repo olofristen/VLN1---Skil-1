@@ -133,7 +133,6 @@ void readDatabase(vector<person>& v)
     {
         while(!file.eof())
         {
-            cout << "Go into the read!" << endl;
             person a;
             string tempBirth, tempDeath;
             getline(file, a.name);
@@ -142,7 +141,6 @@ void readDatabase(vector<person>& v)
             getline(file, tempDeath);
             a.birthYear = atoi(tempBirth.c_str());
             a.deathYear = atoi(tempDeath.c_str());
-            cout << "Done reading" << endl;
             v.push_back(a);
         }
     }
@@ -155,7 +153,6 @@ void readDatabase(vector<person>& v)
 
 void displayDatabase(vector<person> v)
 {
-    cout << "I go into display Database..." << endl;
     for(unsigned int i = 0; (v.size()-1) > i; i++)
     {
         cout << "Name: " << v[i].name << endl;
