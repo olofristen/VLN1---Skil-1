@@ -137,13 +137,15 @@ void readDatabase(vector<person>& v)
         while(!file.eof())
         {
             //cout << "Go into the read!" << endl;
-            getline(file, v[i].name);
-            getline(file, v[i].gender);
-            file >> v[i].birthYear;
-            file >> v[i].deathYear;
+            person a;
+            getline(file, a.name);
+            getline(file, a.gender);
+            file >> a.birthYear;
+            file >> a.deathYear;
             //cout << "Done reading" << endl;
-            i++;
+            v.push_back(a);
         }
+
     }
     else
         cout << "Unable to open file" << endl;
