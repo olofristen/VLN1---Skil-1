@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cctype>
 #include <string>
+#include <vector>
 #include <cstdlib>
 #include <iomanip>
 using namespace std;
@@ -12,6 +13,7 @@ class Person
         string gender;
         int birthYear;
         int deathYear;
+
     public:
         Person();
         //Person (string name, string gender, int birthYear, int deathYear);
@@ -40,13 +42,13 @@ Person::Person()
     birthYear = 0;
     deathYear = 0;
 }
-/*Person::Person(string name, string gender, int birthYear, int deathYear)
+Person::Person(string name, string gender, int birthYear, int deathYear)
 {
-    name = name;
-    gender = gender;
-    birthYear = birthYear;
-    deathYear = deathYear;
-}*/
+    this->name = name;
+    this->gender = gender;
+    this->birthYear = birthYear;
+    this->deathYear = deathYear;
+}
 void Person::welcome()
 {
     cout << "===================================" << endl;
@@ -89,11 +91,21 @@ void Person::choices()
 }
 void Person::readData()
 {
-
+    cout << "Name: ";
+    cin >> name;
+    cout << "Gender (F/M): ";
+    cin >> gender;
+    cout << "Year of birth: ";
+    cin >> birthYear;
+    cout << "Year of death: ";
+    cin >> deathYear;
 }
 void Person::displayData()
 {
-
+    cout << "Name: " << name << endl
+    << "Gender: " << gender << endl
+    << "Year of birth: " << birthYear << endl
+    << "Year of death: " << deathYear << endl;
 }
 void Person::searchData()
 {
