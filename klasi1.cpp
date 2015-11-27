@@ -1,7 +1,6 @@
 #include <iostream>
 #include <cctype>
 #include <string>
-#include <vector>
 #include <cstdlib>
 #include <iomanip>
 using namespace std;
@@ -16,7 +15,7 @@ class Person
 
     public:
         Person();
-        //Person (string name, string gender, int birthYear, int deathYear);
+        Person (string name, string gender, int birthYear, int deathYear);
         void welcome();
         void choices();
         void readData();
