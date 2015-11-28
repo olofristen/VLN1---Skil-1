@@ -27,12 +27,18 @@ class Person
         void sortData();
         void update();
 
+      //  bool sortbybirthyear (const Person& a, const Person& b);
+        friend bool sortbyyearofbirth (const Person& a, const Person &b);
+        friend bool sortbyyearofdeath (const Person& a, const Person &b);
+        friend bool sortbygender (const Person& a, const Person &b);
         bool operator < (const Person& r);
 
 
 };
 void welcome();
 void choices();
+
+
 
 int main()
 {
@@ -41,15 +47,15 @@ int main()
     welcome();
     choices();
 
-    vec.push_back(Person("I","kk",1738,2984));
+    vec.push_back(Person("I","kk",173,2984));
 
-    vec.push_back(Person("E","kk",1738,234));
+    vec.push_back(Person("E","kvk",18,234));
 
-    vec.push_back(Person("U","kk",1738,234));
+    vec.push_back(Person("U","kkkk",3738,2845));
 
-    vec.push_back(Person("B","kk",1738,234));
+    vec.push_back(Person("B","kvk",1738,2));
 
-    vec.push_back(Person("A","kk",63,2984));
+    vec.push_back(Person("A","kk",63,111));
 
     for(int i = 0; i < vec.size(); i++) {
         vec[i].displayData();
@@ -62,17 +68,44 @@ int main()
     }
     sort(vec.rbegin(), vec.rend());
 
-    cout <<"Sorted alphabetically (descending): "<<endl<<endl;
+    cout <<endl << "Sorted alphabetically (descending): "<<endl<<endl;
     for(int i = 0; i < vec.size(); i++) {
         vec[i].displayData();
     }
+    sort(vec.begin(), vec.end(), sortbyyearofbirth);
 
+    cout <<endl << "Sorted by birthyear (ascending): "<<endl<<endl;
+    for(int i = 0; i < vec.size(); i++) {
+        vec[i].displayData();
+    }
+    sort(vec.begin(), vec.end(), sortbyyearofdeath);
+
+    cout <<endl << "Sorted by deathyear (ascending): "<<endl<<endl;
+    for(int i = 0; i < vec.size(); i++) {
+        vec[i].displayData();
+    }
+    sort(vec.begin(), vec.end(), sortbygender);
+
+    cout <<endl << "Sorted by gender: "<<endl<<endl;
+    for(int i = 0; i < vec.size(); i++) {
+        vec[i].displayData();
+    }
 
 }
 bool Person::operator < (const Person &r) {
      return this->name < r.name;
  }
 
+bool sortbyyearofbirth (const Person& a, const Person &b) {
+    return a.birthYear < b.birthYear;
+}
+
+bool sortbygender (const Person& a, const Person &b) {
+    return a.gender < b.gender;
+}
+bool sortbyyearofdeath (const Person& a, const Person &b) {
+    return a.birthYear < b.birthYear;
+}
 Person::Person()
 {
     name = " ";
@@ -149,10 +182,7 @@ void Person::searchData()
 {
 
 }
-void Person::sortData()
-{
 
-}
 void Person::update()
 {
 
