@@ -1,0 +1,53 @@
+#include "Person.h"
+
+Person::Person(string theName, string theGender, string theDateOfBirth, string theDateOfDeath, string theBio) {
+    name = theName;
+    gender = theGender;
+    dateOfBirth = theDateOfBirth;
+    dateOfDeath = theDateOfDeath;
+    bio = theBio;
+}
+
+Person::Person() : name(""), gender(""), dateOfBirth(""), dateOfDeath(""), bio("") {
+
+}
+
+void Person::setName(string theName) {
+    name = theName;
+}
+
+void Person::setGender(string theGender) {
+    gender = theGender;
+}
+
+void Person::setDateOfDeath(string theDateOfDeath) {
+    dateOfDeath = theDateOfDeath;
+}
+
+void Person::setDateOfBirth(string theDateOfBirth) {
+    dateOfBirth = theDateOfBirth;
+}
+
+void Person::setBio(string theBio) {
+    bio = theBio;
+}
+
+string Person::getName() {
+    return name;
+}
+
+string Person::getGender() {
+    return gender;
+}
+
+string Person::getDateOfBirth() {
+    return dateOfBirth;
+}
+
+string Person::getDateOfDeath() {
+    return dateOfDeath;
+}
+
+string Person::getBio() {
+    return bio;
+}
