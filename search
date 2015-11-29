@@ -1,0 +1,242 @@
+#include <iostream>
+#include <vector>
+#include <fstream>
+#include <string>
+#include "Person.h"
+#include "person.cpp"
+
+using namespace std;
+
+void welcome();
+void choices();
+vector<Person*> read_person();
+void displayUsers(vector<Person*> &theUsers);
+vector<Person*> search_person(string searchString, vector<Person*> &theUsers);
+void saveUsers(vector<Person*> &theUsers);
+vector<Person*> readUsers();
+bool file_exists (const string &name);
+
+int main()
+{
+    char check = 'y';
+
+    welcome();
+
+    do{
+        choices();
+
+        cout << endl;
+        cout << "Do you wish to continue? (Y/N) " << endl;
+        cin >> check;
+
+    } while(check == 'y' | check == 'Y');
+}
+
+void welcome()
+{
+    cout << "               ===================================" << endl;
+    cout << "               |             WELCOME             |" << endl;
+    cout << "               |               to                |" << endl;
+    cout << "               |     the Computer Scientist      |" << endl;
+    cout << "               |             Database            |" << endl;
+    cout << "               ===================================" << endl;
+    cout << endl;
+    cout << "In this program you will be able to register and go through the most known"
+         << "computer scientists of all time!" << endl;
+    cout << endl;
+}
+
+void choices()
+{
+    int menu = 0;
+
+    cout << "=================================================================" << endl;
+    cout << "|  What do you want to do?                                      |" << endl;
+    cout << "|    1.  Register new computer scientist/s                      |" << endl;
+    cout << "|    2.  See all computer scientists registered                 |" << endl;
+    cout << "|    3.  Search the database                                    |" << endl;
+    cout << "|  Please enter the number of your choice!                      |" << endl;
+    cout << "=================================================================" << endl;
+    cin >> menu;
+
+    if (menu == 1) {
+        cout << "Register new computer scientist/s" << endl;
+        //reading_person();
+        vector<Person*> persons = read_person();
+        displayUsers(persons);
+        saveUsers(persons);
+    }
+    else if(menu == 2) {
+        cout << "List of all computer scientists registered" << endl;
+        vector<Person*> users = readUsers();
+    /*cout << "=================================================================" << endl;
+    cout << "|  What do you want to Sort the list?                           |" << endl;
+    cout << "|    1.  By name                                                |" << endl;
+    cout << "|    2.  By gender                                              |" << endl;
+    cout << "|    3.  By birth year                                          |" << endl;
+    cout << "|  Please enter the number of your choice!                      |" << endl;
+    cout << "=================================================================" << endl;*/
+        displayUsers(users);
+    }
+    else if(menu == 3) {
+        cout << "Search: ";
+        string searchString;
+        cin >> searchString;
+        cin.ignore();
+
+        vector<Person*> persons = readUsers();
+        vector<Person*> result = search_person(searchString, persons);
+        displayUsers(result);
+    }
+    else {
+        cout << "Error choice not valid!" << endl;
+    }
+}
+
+vector<Person*> read_person()
+{
+    int number;
+
+    cout << "How many persons? ";
+    cin >> number;
+    cin.ignore();
+
+    cout << endl << "Type in person: " << endl << endl;
+
+    vector<Person*> users;
+
+    for (int i = 0; i < number; i++) {
+        string name;
+        cout << "Name: ";
+        getline(cin, name);
+
+
+        string gender;
+        cout << "Gender: ";
+        getline(cin, gender);
+
+
+        string dateOfBirth;
+        cout << "Date of birth: ";
+        getline(cin, dateOfBirth);
+
+
+        string dateOfDeath;
+        cout << "Date of death: ";
+        getline(cin, dateOfDeath);
+
+        string bio;
+        cout << "Bio: ";
+        getline(cin, bio);
+
+        Person *newUser = new Person(name, gender, dateOfBirth, dateOfDeath, bio);
+        users.push_back(newUser);
+    }
+
+
+    return users;
+}
+
+void displayUsers(vector<Person*> &theUsers) {
+    cout << "Displaying users:"  << endl << endl;
+    for (int i = 0; i < theUsers.size(); i++) {
+
+        Person *currentPerson = theUsers[i];
+
+        cout << "Name: " << currentPerson->getName() << endl;
+        cout << "Gender: " << currentPerson->getGender() << endl;
+        cout << "Date of birth: " << currentPerson->getDateOfBirth() << endl;
+        cout << "Date of death: " << currentPerson->getDateOfDeath() << endl;
+        cout << "Bio:" << currentPerson->getBio() << endl;
+    }
+
+}
+
+void saveUsers(vector<Person*> &theUsers) {
+
+    bool fileExists = false;
+
+    if (file_exists("database.txt")) {
+        fileExists = true;
+    }
+
+    ofstream outputFile;
+    outputFile.open("database.txt", ios::out | ios::app);
+
+    for (int i = 0; i < theUsers.size(); i++) {
+
+        if (fileExists == true) {
+            outputFile << endl;
+        }
+        else {
+            // now we have created the file and we can add new line
+            // to the next user
+            fileExists = true;
+        }
+
+        Person *person = theUsers[i];
+        outputFile << person->getName() << endl;
+        outputFile << person->getGender() << endl;
+        outputFile << person->getDateOfBirth() << endl;
+        outputFile << person->getDateOfDeath() << endl;
+        outputFile << person->getBio();
+
+    }
+
+    outputFile.close();
+
+}
+
+vector<Person*> readUsers() {
+
+    vector<Person*> readUsers;
+
+    ifstream instream;
+    instream.open("database.txt");
+
+    if (instream.is_open()) {
+        while (instream.eof() == false) {
+
+            string name;
+            getline(instream, name);
+            string gender;
+            getline(instream, gender);
+            string dateOfBirth;
+            getline(instream, dateOfBirth);
+            string dateOfDeath;
+            getline(instream, dateOfDeath);
+            string bio;
+            getline(instream, bio);
+
+            Person *person = new Person(name, gender, dateOfBirth, dateOfDeath, bio);
+            readUsers.push_back(person);
+
+
+        }
+    }
+
+    return readUsers;
+}
+
+vector<Person*> search_person(string searchString, vector<Person*> &theUsers) {
+    vector<Person*> foundUsers;
+    for (int i = 0; i < theUsers.size(); i++) {
+        Person *currentPerson = theUsers[i];
+
+
+        if (currentPerson->getName().find(searchString) != string::npos || currentPerson->getGender().find(searchString) != string::npos  || currentPerson->getDateOfBirth().find(searchString) != string::npos  || currentPerson->getDateOfDeath().find(searchString) != string::npos || currentPerson->getBio().find(searchString) !=string::npos ) {
+            foundUsers.push_back(currentPerson);
+        }
+    }
+
+    return foundUsers;
+}
+
+bool file_exists (const string &name) {
+    if (FILE *file = fopen(name.c_str(), "r")) {
+        fclose(file);
+        return true;
+    } else {
+        return false;
+    }
+}
