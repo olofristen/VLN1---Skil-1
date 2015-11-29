@@ -1,0 +1,41 @@
+#ifndef Person_hpp
+#define Person_hpp
+
+#include <stdio.h>
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+class Person {
+
+public:
+
+    // Constructors
+    Person(string theName, string theGender, string theDateOfBirth, string theDateOfDeath, string theBio);
+    Person();
+
+    // Setters
+    void setName(string theName);
+    void setGender(string theGender);
+    void setDateOfBirth(string theDateOfBirth);
+    void setDateOfDeath(string theDateOfDeath);
+    void setBio(string theBio);
+
+    // Getters
+    string getName();
+    string getGender();
+    string getDateOfBirth();
+    string getDateOfDeath();
+    string getBio();
+
+private:
+    string name;
+    string gender;
+    string dateOfBirth;
+    string dateOfDeath;
+    string bio;
+
+};
+
+#endif /* Person_hpp */
