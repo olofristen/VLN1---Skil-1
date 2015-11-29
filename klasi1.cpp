@@ -43,9 +43,9 @@ class Person
 
 
 void reading_person();
-void readDatabase(vector<Person>& v);
+void readDatabase();
 void welcome();
-void choices(vector<Person>& v);
+void choices();
 void displayDatabase(vector<Person>& v);
 
 
@@ -63,7 +63,7 @@ void welcome()
     cout << endl;
 }
 
-void choices(vector<Person>& v)
+void choices()
 {
     int menu = 0;
 
@@ -84,8 +84,7 @@ void choices(vector<Person>& v)
             break;
         case 2:
             cout << "List of all computer scientists registered" << endl;
-            readDatabase(v);
-        //    displayDatabase(v);
+            readDatabase();
             break;
         case 3:
             cout << "Search" << endl;
@@ -138,8 +137,9 @@ void reading_person()
 
 }
 
-void readDatabase(vector<Person>& v)
+void readDatabase()
 {
+    vector<Person> v;
     ifstream file;
     file.open("database.csv");
 
@@ -157,13 +157,15 @@ void readDatabase(vector<Person>& v)
         cout << "Unable to open file" << endl;
 
     file.close();
+    sort(v.begin(), v.end());   //stafrófsröð
+
     displayDatabase(v);
 
 }
 
 void displayDatabase(vector<Person>& v)
 {
-    for(unsigned int i = 0; i < (v.size()-1); i++)
+    for(unsigned int i = 0; i < v.size(); i++)
     {
         cout << endl;
         v[i].displayData();
@@ -173,14 +175,12 @@ void displayDatabase(vector<Person>& v)
 
 int main()
 {
-
-    vector<Person> vec;
     char check = 'y';
 
     welcome();
 
     do{
-        choices(vec);
+        choices();
 
         cout << endl;
         cout << "Do you wish to continue? (Y/N) " << endl;
