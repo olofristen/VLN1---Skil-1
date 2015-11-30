@@ -40,6 +40,5 @@ class Person
         int deathYear;
 
 
-
 };
 #endif
