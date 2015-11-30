@@ -15,9 +15,11 @@ using namespace std;
 class Person
 {
 
+class Person
+{
     public:
         Person();
-        Person (string name, string gender, int birthYear, int deathYear);
+        Person (string name, string gender, int birthYear, int deathYear, string bio);
         void readData(ifstream& file);
         void displayData();
         void searchData();
@@ -27,6 +29,7 @@ class Person
         string getgender();
         int getbirthyear();
         int getdeathyear();
+        string getbio();
 
         friend bool sortbyyearofbirth (const Person& a, const Person &b);
         friend bool sortbyyearofdeath (const Person& a, const Person &b);
@@ -38,7 +41,6 @@ class Person
         string gender;
         int birthYear;
         int deathYear;
-
-
+        string bio;
 };
 #endif
