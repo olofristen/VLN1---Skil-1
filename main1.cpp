@@ -17,7 +17,6 @@ void welcome();
 void choices();
 void displayDatabase(vector<Person>& v);
 
-
 void welcome()
 {
     cout << "===================================" << endl;
