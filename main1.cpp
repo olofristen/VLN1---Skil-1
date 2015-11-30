@@ -15,15 +15,72 @@ void reading_person();
 void readDatabase();
 void welcome();
 void choices();
+void registerMessage();
+void sortMessage();
+void searchMessage();
 void displayDatabase(vector<Person>& v);
+
+
+int main()
+{
+    char check = 'y';
+
+    welcome();
+
+    do{
+        choices();
+
+        cout << endl;
+        cout << "Do you wish to continue? (Y/N) " << endl;
+        cin >> check;
+
+    } while(check == 'y' || check == 'Y');
+
+
+
+    /*for(int i = 0; i < vec.size(); i++) {
+        vec[i].displayData();
+    }
+    sort(vec.begin(), vec.end());
+
+    cout <<endl << "Sorted alphabetically (ascending): "<<endl<<endl;
+    for(int i = 0; i < vec.size(); i++) {
+        vec[i].displayData();
+    }
+    sort(vec.rbegin(), vec.rend());
+
+    cout <<endl << "Sorted alphabetically (descending): "<<endl<<endl;
+    for(int i = 0; i < vec.size(); i++) {
+        vec[i].displayData();
+    }
+    sort(vec.begin(), vec.end(), sortbyyearofbirth);
+
+    cout <<endl << "Sorted by birthyear (ascending): "<<endl<<endl;
+    for(int i = 0; i < vec.size(); i++) {
+        vec[i].displayData();
+    }
+    sort(vec.begin(), vec.end(), sortbyyearofdeath);
+
+    cout <<endl << "Sorted by deathyear (ascending): "<<endl<<endl;
+    for(int i = 0; i < vec.size(); i++) {
+        vec[i].displayData();
+    }
+    sort(vec.begin(), vec.end(), sortbygender);
+
+    cout <<endl << "Sorted by gender: "<<endl<<endl;
+    for(int i = 0; i < vec.size(); i++) {
+        vec[i].displayData();
+    }*/
+
+}
 
 void welcome()
 {
     cout << "===================================" << endl;
     cout << "|             WELCOME             |" << endl;
     cout << "|               to                |" << endl;
-    cout << "|     the Computer Scientist      |" << endl;
-    cout << "|             Database            |" << endl;
+    cout << "|      the Famous Computing       |" << endl;
+    cout << "|         People Database         |" << endl;
     cout << "===================================" << endl;
     cout << endl;
     cout << "In this program you will be able to register and go through the most known"
@@ -47,24 +104,85 @@ void choices()
     switch (menu)
     {
         case 1:
-            cout << "Register new computer scientist/s" << endl;
+            system("CLS");
+            registerMessage();
             reading_person();
             break;
         case 2:
-            cout << "List of all computer scientists registered" << endl;
+            system("CLS");
+            sortMessage();
             readDatabase();
             break;
         case 3:
             cout << "Search" << endl;
+            system("CLS");
+            searchMessage();
             break;
     }
+}
+
+void registerMessage()
+{
+    cout << "   =================================================================" << endl;
+    cout << "   |     REGISTER NEW COMPUTING GENIUS                             |" << endl;
+    cout << "   =================================================================" << endl;
+    cout << endl;
+}
+
+void sortMessage()
+{
+    int sortMenu = 0;
+
+    cout << "   =================================================================" << endl;
+    cout << "   |     THE DATABASE - SORT                                       |" << endl;
+    cout << "   =================================================================" << endl;
+    cout << endl;
+
+    cout << "   =================================================================" << endl;
+    cout << "   |  How do you want the computing geniuses to appear?            |" << endl;
+    cout << "   |    1.  A-Z                                                    |" << endl;
+    cout << "   |    2.  Z-A                                                    |" << endl;
+    cout << "   |    3.  By gender                                              |" << endl;
+    cout << "   |    4.  By year of birth                                       |" << endl;
+    cout << "   |    5.  By year of death                                       |" << endl;
+    cout << "   |  Please enter the number of your choice!                      |" << endl;
+    cout << "   =================================================================" << endl;
+    cin >> sortMenu;
+
+    switch (sortMenu)
+    {
+        case 1:
+
+            break;
+        case 2:
+
+            break;
+        case 3:
+
+            break;
+        case 4:
+
+            break;
+        case 5:
+
+            break;
+    }
+}
+
+void searchMessage()
+{
+    cout << "   =================================================================" << endl;
+    cout << "   |     THE DATABASE - SEARCH                                     |" << endl;
+    cout << "   =================================================================" << endl;
+    cout << endl;
+
 }
 
 void reading_person()
 {
     int number;
 
-    cout << "How many persons? ";
+    cout << "How many computing geniuses do you want to register? ";
     cin >> number;
 
     cout << endl << "Type in person: " << endl << endl;
@@ -93,6 +211,11 @@ void reading_person()
 
             cout << "Year of death: ";
             cin >> temp;
+            file << temp << endl;
+
+            cout << "Bio: ";
+            cin.ignore();
+            getline(cin, temp);
             file << temp << endl;
 
             cout << endl;
@@ -139,22 +262,3 @@ void displayDatabase(vector<Person>& v)
         v[i].displayData();
     }
 }
-
-
-int main()
-{
-    char check = 'y';
-
-    welcome();
-
-    do{
-        choices();
-
-        cout << endl;
-        cout << "Do you wish to continue? (Y/N) " << endl;
-        cin >> check;
-
-    } while(check == 'y' || check == 'Y');
-
-}
-
