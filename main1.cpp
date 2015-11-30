@@ -36,42 +36,6 @@ int main()
 
     } while(check == 'y' || check == 'Y');
 
-
-
-    /*for(int i = 0; i < vec.size(); i++) {
-        vec[i].displayData();
-    }
-    sort(vec.begin(), vec.end());
-
-    cout <<endl << "Sorted alphabetically (ascending): "<<endl<<endl;
-    for(int i = 0; i < vec.size(); i++) {
-        vec[i].displayData();
-    }
-    sort(vec.rbegin(), vec.rend());
-
-    cout <<endl << "Sorted alphabetically (descending): "<<endl<<endl;
-    for(int i = 0; i < vec.size(); i++) {
-        vec[i].displayData();
-    }
-    sort(vec.begin(), vec.end(), sortbyyearofbirth);
-
-    cout <<endl << "Sorted by birthyear (ascending): "<<endl<<endl;
-    for(int i = 0; i < vec.size(); i++) {
-        vec[i].displayData();
-    }
-    sort(vec.begin(), vec.end(), sortbyyearofdeath);
-
-    cout <<endl << "Sorted by deathyear (ascending): "<<endl<<endl;
-    for(int i = 0; i < vec.size(); i++) {
-        vec[i].displayData();
-    }
-    sort(vec.begin(), vec.end(), sortbygender);
-
-    cout <<endl << "Sorted by gender: "<<endl<<endl;
-    for(int i = 0; i < vec.size(); i++) {
-        vec[i].displayData();
-    }*/
-
 }
 
 void welcome()
@@ -100,7 +64,8 @@ void choices()
     cout << "   |  Please enter the number of your choice!                      |" << endl;
     cout << "   =================================================================" << endl;
     cin >> menu;
-
+    
+    vector<Person> vec;
     switch (menu)
     {
         case 1:
@@ -110,8 +75,8 @@ void choices()
             break;
         case 2:
             system("CLS");
-            sortMessage();
-            readDatabase();
+            vec = readDatabase(vec);
+            sortMessage(vec);
             break;
         case 3:
             cout << "Search" << endl;
@@ -129,9 +94,9 @@ void registerMessage()
     cout << endl;
 }
 
-void sortMessage()
+void sortMessage(vector<Person>& vec)
 {
-    int sortMenu = 0;
+    char sortMenu;
 
     cout << "   =================================================================" << endl;
     cout << "   |     THE DATABASE - SORT                                       |" << endl;
@@ -151,22 +116,23 @@ void sortMessage()
 
     switch (sortMenu)
     {
-        case 1:
-
+        default:
+            sort(v.begin(), v.end());
             break;
-        case 2:
-
+        case '2':
+            sort(v.rbegin(), v.rend());
             break;
-        case 3:
-
+        case '3':
+            sort(v.begin(), v.end(), sortbygender);
             break;
-        case 4:
-
+        case '4':
+            sort(v.begin(), v.end(), sortbyyearofbirth);
             break;
-        case 5:
-
+        case '5':
+            sort(v.begin(), v.end(), sortbyyearofdeath);
             break;
     }
+    displayDatabase(v);
 }
 
 void searchMessage()
@@ -228,9 +194,8 @@ void reading_person()
 
 }
 
-void readDatabase()
+vector<Person>& readDatabase(vector<Person>& v)
 {
-    vector<Person> v;
     ifstream file;
     file.open("database.csv");
 
@@ -243,14 +208,13 @@ void readDatabase()
 
             v.push_back(a);
         }
+        v.erase(v.end()-1);     //Skip the last newline ('\n') character, it would make a new (empty) person class
     }
     else
         cout << "Unable to open file" << endl;
 
     file.close();
-    sort(v.begin(), v.end());   //stafrófsröð
-
-    displayDatabase(v);
+    return v;
 
 }
 
