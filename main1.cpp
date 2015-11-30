@@ -7,19 +7,18 @@
 #include <vector>
 #include <algorithm>
 #include <fstream>
-#include "klasi.h"
+#include "person.h"  // ATH breytti nafninu á skránni!!
 
 using namespace std;
 
 void reading_person();
-void readDatabase();
+vector<Person>& readDatabase(vector<Person>& v);
 void welcome();
 void choices();
 void registerMessage();
-void sortMessage();
+void sortMessage(vector<Person>& v);
 void searchMessage();
 void displayDatabase(vector<Person>& v);
-
 
 int main()
 {
@@ -35,7 +34,6 @@ int main()
         cin >> check;
 
     } while(check == 'y' || check == 'Y');
-
 }
 
 void welcome()
@@ -54,7 +52,7 @@ void welcome()
 
 void choices()
 {
-    int menu = 0;
+    char menu;
 
     cout << "   =================================================================" << endl;
     cout << "   |  What do you want to do?                                      |" << endl;
@@ -64,22 +62,32 @@ void choices()
     cout << "   |  Please enter the number of your choice!                      |" << endl;
     cout << "   =================================================================" << endl;
     cin >> menu;
-    
+
+    if (menu != '1' || menu != '2' || menu != '3')  // virkar ekki af e-h ástæðu...
+    {
+        do
+        {
+            cout << "This option is not available. Please enter an available option: ";
+            cin >> menu;
+        }
+        while (menu != '1' || menu != '2' || menu != '3');
+    }
+
     vector<Person> vec;
+
     switch (menu)
     {
-        case 1:
+        case '1':
             system("CLS");
             registerMessage();
             reading_person();
             break;
-        case 2:
+        case '2':
             system("CLS");
             vec = readDatabase(vec);
             sortMessage(vec);
             break;
-        case 3:
-            cout << "Search" << endl;
+        case '3':
             system("CLS");
             searchMessage();
             break;
@@ -94,7 +102,7 @@ void registerMessage()
     cout << endl;
 }
 
-void sortMessage(vector<Person>& vec)
+void sortMessage(vector<Person>& v)
 {
     char sortMenu;
 
@@ -123,13 +131,13 @@ void sortMessage(vector<Person>& vec)
             sort(v.rbegin(), v.rend());
             break;
         case '3':
-            sort(v.begin(), v.end(), sortbygender);
+            sort(v.begin(), v.end(), sortbygender);  //fæ not declared in this scope
             break;
         case '4':
-            sort(v.begin(), v.end(), sortbyyearofbirth);
+            sort(v.begin(), v.end(), sortbyyearofbirth);  //fæ not declared in this scope
             break;
         case '5':
-            sort(v.begin(), v.end(), sortbyyearofdeath);
+            sort(v.begin(), v.end(), sortbyyearofdeath);   //fæ not declared in this scope
             break;
     }
     displayDatabase(v);
@@ -208,14 +216,14 @@ vector<Person>& readDatabase(vector<Person>& v)
 
             v.push_back(a);
         }
-        v.erase(v.end()-1);     //Skip the last newline ('\n') character, it would make a new (empty) person class
+        v.erase(v.end()-1);
     }
     else
         cout << "Unable to open file" << endl;
 
     file.close();
-    return v;
 
+    return v;
 }
 
 void displayDatabase(vector<Person>& v)
