@@ -14,9 +14,6 @@ using namespace std;
 
 class Person
 {
-
-class Person
-{
     public:
         Person();
         Person (string name, string gender, int birthYear, int deathYear, string bio);
