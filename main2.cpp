@@ -66,6 +66,16 @@ void choices()
     cout << "   =================================================================" << endl;
     cin >> menu;
 
+    /*if (menu != '1' || menu != '2' || menu != '3')  // virkar ekki af e-h ástæðu...
+    {
+        do
+        {
+            cout << "This option is not available. Please enter an available option: ";
+            cin >> menu;
+        }
+        while (menu != '1' || menu != '2' || menu != '3');
+    }*/
+
     switch (menu)
     {
         case 1:
