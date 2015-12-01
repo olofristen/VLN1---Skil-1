@@ -227,6 +227,7 @@ void displayDatabase(vector<Person>& v)
         v[i].displayData();
     }
 }
+
 void searchDatabase()
 {
     vector<Person> v;
@@ -262,6 +263,7 @@ void searchDatabase()
             if(searchMenu == 1)
               {
                 string search;
+                int countM = 0;
                 cout << "What name would you like to find?: ";
                 cin >> search;
                 for(unsigned int i = 0; i < v.size(); i++)
@@ -270,13 +272,17 @@ void searchDatabase()
                    {
                        cout << "We have a match!" << endl;
                        v[i].displayData();
+                       countM++;
                    }
-                   else
-                       cout << "sorry, no match.";
                  }
-            }
+                if(countM == 0)
+                   {
+                    cout << "sorry, no match.";
+                   }
+              }
                else if(searchMenu == 2)
-                { string search;
+                {   string search;
+                    int countM = 0;
                     cout << "A lady or a man? or a dog maby?: ";
                     cin >> search;
                     for(unsigned int i = 0; i < v.size(); i++)
@@ -285,60 +291,74 @@ void searchDatabase()
                         {
                             cout << "We have a match!" << endl;
                             v[i].displayData();
+                            countM++;
                         }
-                        else
-                            cout << "sorry, no match.";
-                         }
-            }
+                    }
+                  if(countM == 0)
+                      {
+                       cout << "sorry, no match.";
+                       }
+                }
                 else if(searchMenu == 3)
-                    {  int search;
+                    {
+                        int search;
+                        int countM = 0;
                         cout << "When was the person born?: ";
                         cin >> search;
                         for(unsigned int i = 0; i < v.size(); i++)
                         {
-                            if (v[i].getbirthyear() == search)
+                            if (v[i].getbirthyear()== search)
                             {
                                 cout << "We have a match!" << endl;
                                 v[i].displayData();
+                                countM++;
                             }
-                            else
-                                cout << "sorry, no match.";
-
+                        }
+                        if(countM == 0)
+                        {
+                            cout << "sorry, no match.";
+                        }
                     }
-            }
                 else if(searchMenu == 4)
-                        {   int search;
+                        {
+                            int search;
+                            int countM = 0;
                             cout << "When did the person die?: ";
                             cin >> search;
                             for(unsigned int i = 0; i < v.size(); i++)
                             {
-                                if (v[i].getdeathyear() == search)
+                                if (v[i].getdeathyear()== search)
                                 {
                                     cout << "We have a match!" << endl;
                                     v[i].displayData();
+                                    countM++;
                                 }
-                                else
-                                    cout << "sorry, no match.";
-                    }
-            }
+
+                            }
+                            if(countM == 0)
+                               {
+                                cout << "sorry, no match.";
+                               }
+                         }
                 else if(searchMenu == 5)
-                            {    string search;
+                            {
+                                 string search;
+                                 int countM = 0;
                                  cout << "Enter some word and we will see..: ";
                                   cin >> search;
                                    for(unsigned int i = 0; i < v.size(); i++)
                                    {
-                                       if (v[i].getbio() == search)
+                                       if (v[i].getbio().find(search) != string::npos)
                                        {
                                            cout << "We have a match!" << endl;
                                            v[i].displayData();
+                                           countM++;
                                        }
-                                       else
-                                           cout << "sorry, no match.";
-
-                    }
-            }
-
-
+                                    }
+                                   if(countM == 0)
+                                      {
+                                       cout << "sorry, no match.";
+                                      }
+                             }
 
 }
-
