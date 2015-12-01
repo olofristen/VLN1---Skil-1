@@ -74,8 +74,9 @@ void Person::displayData()
     cout << "Name: " << getname() << endl
     << "Gender: " << getgender() << endl
     << "Year of Birth: " << getbirthyear() << endl
-    << "Year of Death: " << getdeathyear() << endl
-    << "Bio: " << getbio() << endl;
+    << "Year of Death: " << getdeathyear() << endl << endl
+    << "Bio: " << getbio() << endl
+    << "------------------------------------------------------------------" << endl;
 }
 
 
