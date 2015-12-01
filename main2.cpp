@@ -208,6 +208,8 @@ void readDatabase()
 
             v.push_back(a);
         }
+        v.erase(v.end()-1);
+
     }
     else
         cout << "Unable to open file" << endl;
@@ -243,6 +245,7 @@ void searchDatabase()
 
             v.push_back(a);
         }
+        //v.erase(v.end()-1);
     }
     else
         cout << "Unable to open file" << endl;
@@ -362,3 +365,5 @@ void searchDatabase()
                              }
 
 }
+
+
