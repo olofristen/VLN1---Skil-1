@@ -117,21 +117,21 @@ void sortMessage()
 
     switch (sortMenu)
     {
-        case 1:
-
+        default:
+            sort(v.begin(), v.end());
             break;
-        case 2:
-
+        case '2':
+            sort(v.rbegin(), v.rend());
             break;
-        case 3:
-
+        /*case '3':
+            sort(v.begin(), v.end(), sortbygender);  //fæ not declared in this scope
             break;
-        case 4:
-
+        case '4':
+            sort(v.begin(), v.end(), sortbyyearofbirth);  //fæ not declared in this scope
             break;
-        case 5:
-
-            break;
+        case '5':
+            sort(v.begin(), v.end(), sortbyyearofdeath);   //fæ not declared in this scope
+            break;*/
     }
 }
 
