@@ -1,0 +1,20 @@
+        cout << "input gender (F/M): ";
+        cin >> a;
+        do{
+            switch (a)
+            {
+                case 'f':
+                case 'F':
+                    gender = "Female";
+                    break;
+                case 'm':
+                case 'M':
+                    gender = "Male";
+                    break;
+                default:
+                    cout << "invalid input" << endl;
+                    cout << "try again (F/M): ";
+                    cin >> a;
+                    break;
+            }
+        }while(gender == "");
