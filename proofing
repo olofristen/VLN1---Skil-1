@@ -1,20 +1,14 @@
-        cout << "input gender (F/M): ";
-        cin >> a;
         do{
-            switch (a)
-            {
-                case 'f':
-                case 'F':
-                    gender = "Female";
-                    break;
-                case 'm':
-                case 'M':
-                    gender = "Male";
-                    break;
-                default:
-                    cout << "invalid input" << endl;
-                    cout << "try again (F/M): ";
-                    cin >> a;
-                    break;
+            cout << "input gender (F/M): ";
+            cin >> a;
+
+            if(a.compare("f") == 0 || a.compare("F") == 0){
+                gender = "Female";
+            }
+            else if(a.compare("m") == 0 || a.compare("M") == 0){
+                gender = "Male";
+            }
+            else{
+                cout << "Invalid input" << endl;
             }
         }while(gender == "");
