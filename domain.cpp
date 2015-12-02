@@ -1,6 +1,16 @@
 #include "domain.h"
 
 
+bool sortbyyearofbirth (const Person& a, const Person &b) {
+    return a.birthYear < b.birthYear;
+}
+
+bool sortbygender (const Person& a, const Person &b) {
+    return a.gender < b.gender;
+}
+bool sortbyyearofdeath (const Person& a, const Person &b) {
+    return a.deathYear < b.deathYear;
+}
 
 Domain::Domain() {
 
@@ -17,29 +27,36 @@ void Domain::add_new_person(string name, string gender, int birthyear, int death
     DB.write_to_DB(v);
 }
 
-void Domain::sort_and_display(char sortMenu) {       // sorterar vektorinn...
+void Domain::sort_and_display(string sortMenu) {       // sorterar vektorinn...
 
-    switch (sortMenu)
-    {
-    case '1':
-        sort(v.begin(), v.end());
-        break;
-    case '2':
-        sort(v.rbegin(), v.rend());
-        break;
-    case '3':
-        sort(v.begin(), v.end());
-        sort(v.begin(), v.end(), sortbygender);
-        break;
-    case '4':
-        sort(v.begin(), v.end(), sortbyyearofbirth);
-        break;
-    case '5':
-        sort(v.begin(), v.end(), sortbyyearofdeath);
-        break;
-    default:
-        cout << "Invalid input! " << endl;
-    }
+    do{
+        if(sortMenu.compare("1") == 0) {
+            sort(v.begin(), v.end());
+        }
+        else if(sortMenu.compare("2") == 0) {
+            sort(v.rbegin(), v.rend());
+        }
+        else if(sortMenu.compare("3") == 0) {
+            sort(v.begin(), v.end());
+            sort(v.begin(), v.end(), sortbygender);
+        }
+        else if(sortMenu.compare("4") == 0) {
+            sort(v.begin(), v.end());
+            sort(v.begin(), v.end(), sortbyyearofbirth);
+        }
+        else if(sortMenu.compare("5") == 0) {
+            sort(v.begin(), v.end());
+            sort(v.begin(), v.end(), sortbyyearofdeath);
+        }
+        else if(sortMenu.compare("Q") == 0 || sortMenu.compare("q") == 0) {
+            return;
+        }
+        else {
+            cout << "Invalid input! " << endl;
+            cin >> sortMenu;
+        }
+    } while(atoi(sortMenu.c_str()) <= 0 || atoi(sortMenu.c_str()) > 5);
+
     displayDatabase();
 }
 
@@ -54,13 +71,12 @@ void Domain::displayDatabase()      // Prentar út vektorinn...
 }
 
 
-void Domain::searchstring(char num, string search) {
+void Domain::searchstring(string num, string search) {
 
     int countM = 0;
     cout << endl;
 
-    switch (num) {
-    case '1':
+    if(num.compare("1") == 0) {
         for(unsigned int i = 0; i < v.size(); i++)
         {
             if (v[i].getname().find(search) != string::npos)
@@ -69,8 +85,8 @@ void Domain::searchstring(char num, string search) {
                 countM++;
             }
         }
-        break;
-    case '2':
+    }
+    else if(num.compare("2") == 0) {
         for(unsigned int i = 0; i < v.size(); i++)
         {
             if (v[i].getgender().find(search) != string::npos)
@@ -79,10 +95,9 @@ void Domain::searchstring(char num, string search) {
                 countM++;
             }
         }
-
-        break;
-    case '3':
-        for(unsigned int i = 0; i < v.size(); i++)
+    }
+    else if(num.compare("3") == 0) {
+         for(unsigned int i = 0; i < v.size(); i++)
         {
             if (v[i].getbirthyear() == atoi(search.c_str()))
             {
@@ -90,8 +105,8 @@ void Domain::searchstring(char num, string search) {
                 countM++;
             }
         }
-        break;
-    case '4':
+    }
+    else if(num.compare("4") == 0) {
         for(unsigned int i = 0; i < v.size(); i++)
         {
             if (v[i].getdeathyear()== atoi(search.c_str()))
@@ -100,8 +115,8 @@ void Domain::searchstring(char num, string search) {
                 countM++;
             }
         }
-        break;
-    case '5':
+    }
+    else if(num.compare("5") == 0) {
         for(unsigned int i = 0; i < v.size(); i++)
         {
             if (v[i].getbio().find(search) != string::npos)
@@ -110,7 +125,6 @@ void Domain::searchstring(char num, string search) {
                 countM++;
             }
         }
-        break;
     }
 
     if(countM == 0)
@@ -122,4 +136,3 @@ void Domain::searchstring(char num, string search) {
     }
 }
 
-// Vantar allt sem tengist search...
