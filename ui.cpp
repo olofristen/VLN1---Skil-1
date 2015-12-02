@@ -1,18 +1,19 @@
 #include "ui.h"
 
 // UI, heldur utan um öll samskipti við notendur, cin, cout, main.... -> samskipti við domain(worker) sem útfærir vektor o.s.frv.
-// helstu atriði sem eru í boði: add, sort og printlist, search.
+// helstu atriði sem eru í boði: add, sort og printlist, search
+// Þarf ekki endilega að vera klasi en getur haft samskipti við Person-klasa sem er óháður layerunum
 
 
 void UI::welcome()
 {
 
-    cout << "===================================" << endl;
-    cout << "|             WELCOME             |" << endl;
-    cout << "|               to                |" << endl;
-    cout << "|     the Computer Scientist      |" << endl;
-    cout << "|             Database            |" << endl;
-    cout << "===================================" << endl;
+    cout << "                         ===================================" << endl;
+    cout << "                         |             WELCOME             |" << endl;
+    cout << "                         |               to                |" << endl;
+    cout << "                         |     the Computer Scientist      |" << endl;
+    cout << "                         |             Database            |" << endl;
+    cout << "                         ===================================" << endl;
     cout << endl;
     cout << "In this program you will be able to register and go through the most known "
          << "computer scientists of all time!" << endl;
@@ -72,7 +73,7 @@ void UI::searchMessage()
 
 void UI::sortMessage()     // sleppa því að taka inn vektorinn, á ekki að vera hér...
 {
-    char sortMenu = '0';
+    string sortMenu = "";
 
     cout << "   =================================================================" << endl;
     cout << "   |     THE DATABASE - SORT                                       |" << endl;
@@ -92,7 +93,7 @@ void UI::sortMessage()     // sleppa því að taka inn vektorinn, á ekki að v
 
     cin >> sortMenu;
 
-    if(sortMenu == 'Q' || sortMenu == 'q') {
+    if(sortMenu == "Q" || sortMenu == "q") {
         return ;
     }
     my_dom.sort_and_display(sortMenu);
@@ -101,7 +102,7 @@ void UI::sortMessage()     // sleppa því að taka inn vektorinn, á ekki að v
 
 void UI::searchData()
 {
-    char searchMenu = '0';
+    string searchMenu = "", search = "";
     searchMessage();
 
     cout << "   =================================================================" << endl;
@@ -113,37 +114,37 @@ void UI::searchData()
     cout << "   |    5.  By bio                                                 |" << endl;
     cout << "   |  Please enter the number of your choice!                      |" << endl;
     cout << "   =================================================================" << endl;
-    cin >> searchMenu;
 
-    string search;
-    if(searchMenu == 'Q' || searchMenu == 'q') {
+    do{
+        cin >> searchMenu;
 
-        return ;
-    }
+        if(searchMenu.compare("1") == 0) {
+            cout << "What name would you like to find?: ";
+        }
+        else if(searchMenu.compare("2") == 0) {
+            cout << "A lady or a man? Or maybe a dog?: ";
+        }
+        else if(searchMenu.compare("3") == 0) {
+            cout << "When was the person born?: ";
+        }
+        else if(searchMenu.compare("4") == 0) {
+            cout << "When did the person die?: ";
+        }
+        else if(searchMenu.compare("5") == 0) {
+            cout << "Enter some word and we will see..: ";
+        }
+        else if(searchMenu.compare("Q") == 0 || searchMenu.compare("q") == 0) {
+            return ;
+        }
+        else {
+            cout << "Invalid input! " << endl;
+        }
+    }  while(atoi(searchMenu.c_str()) <= 0 || atoi(searchMenu.c_str()) > 5);
 
-    switch(searchMenu) {
-    case '1':
-        cout << "What name would you like to find?: ";
-        break;
-    case '2':
-        cout << "A lady or a man? Or maybe a dog?: ";
-        break;
-    case '3':
-        cout << "When was the person born?: ";
-        break;
-    case '4':
-        cout << "When did the person die?: ";
-        break;
-    case '5':
-        cout << "Enter some word and we will see..: ";
-        break;
-    default:
-        cout << "Invalid input! " << endl;
-        break;
-    }
     cin >> search;
     my_dom.searchstring(searchMenu, search);
 }
+
 
 void UI::reading_person() {
 
@@ -213,10 +214,10 @@ void UI::reading_person() {
             else if(dead.compare("n") == 0 || dead.compare("N") == 0) {
                 deathyear = -1;     // Ekki dauður
             }
-            else {          // Ekki vitað, spyr aftur
+            else if(deathyear < birthyear || deathyear > 2015) {
                 cout << "Invalid input! " << endl;
             }
-            if(deathyear < birthyear || deathyear > 2015) {
+            else{          // Ekki vitað, spyr aftur
                 cout << "Invalid input! " << endl;
             }
 
