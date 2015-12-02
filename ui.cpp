@@ -139,7 +139,7 @@ void UI::searchData()
         else {
             cout << "Invalid input! " << endl;
         }
-    }  while(searchMenu.compare("1") != 0 || searchMenu.compare("2") != 0 ||searchMenu.compare("3") != 0 ||searchMenu.compare("4") != 0 ||searchMenu.compare("5") != 0 ||searchMenu.compare("q") != 0 || searchMenu.compare("Q") != 0);
+    }  while(atoi(searchMenu.c_str()) <= 0 || atoi(searchMenu.c_str()) > 5);
 
     cin >> search;
     my_dom.searchstring(searchMenu, search);
