@@ -4,16 +4,6 @@ bool Person::operator < (const Person &r) {
      return this->name < r.name;
 }
 
-bool sortbyyearofbirth (const Person& a, const Person &b) {
-    return a.birthYear < b.birthYear;
-}
-
-bool sortbygender (const Person& a, const Person &b) {
-    return a.gender < b.gender;
-}
-bool sortbyyearofdeath (const Person& a, const Person &b) {
-    return a.deathYear < b.deathYear;
-}
 
 Person::Person()
 {
@@ -61,7 +51,7 @@ void Person::displayData()
     else {
         cout << "Year of death: " << getdeathyear() << endl;
     }
-    cout << "Bio: " << getbio() << endl
+    cout << endl << "Bio: " << getbio() << endl
          << "------------------------------------------------------------------" << endl;
 }
 
