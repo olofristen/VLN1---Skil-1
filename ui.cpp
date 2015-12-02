@@ -139,7 +139,7 @@ void UI::searchData()
         else {
             cout << "Invalid input! " << endl;
         }
-    }  while(atoi(searchMenu.c_str()) <= 0 || atoi(searchMenu.c_str()) > 5);
+    }  while(searchMenu.compare("1") != 0 || searchMenu.compare("2") != 0 ||searchMenu.compare("3") != 0 ||searchMenu.compare("4") != 0 ||searchMenu.compare("5") != 0 ||searchMenu.compare("q") != 0 || searchMenu.compare("Q") != 0);
 
     cin >> search;
     my_dom.searchstring(searchMenu, search);
@@ -210,13 +210,15 @@ void UI::reading_person() {
                 cout << "Year of death: ";  // Dauður
                 cin >> year;
                 deathyear = atoi(year.c_str());
+
+                if(deathyear < birthyear || deathyear > 2015) {
+                    cout << "Invalid input! " << endl;
+                }
             }
             else if(dead.compare("n") == 0 || dead.compare("N") == 0) {
                 deathyear = -1;     // Ekki dauður
             }
-            else if(deathyear < birthyear || deathyear > 2015) {
-                cout << "Invalid input! " << endl;
-            }
+
             else{          // Ekki vitað, spyr aftur
                 cout << "Invalid input! " << endl;
             }
